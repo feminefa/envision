@@ -233,9 +233,9 @@ export default class AddPatientComponent extends Component {
     }
     render() {
         const { navigate } = this.props.navigation;
-        /*(const providers = this.props.providers.map((item) => {
+        const providers = this.props.providers.map((item) => {
             return { label: `${item.full_name}, ${item.title}`, value: item.username }
-        });*/
+        });
 
         return <View style={{...screenStyle.container, flex: 1, flexDirection: 'column'}}>
             <Text style={Object.assign({}, styles.error, {opacity: this.props.error?100:0 })} >
@@ -267,7 +267,7 @@ export default class AddPatientComponent extends Component {
                         onDownArrow={() => {
                             //this.inputRefs.picker.togglePicker();
                         }}
-                        style={{...pickerSelectStyles, height:0}}
+                        style={{...pickerSelectStyles}}
                         value={this.state.patient.provider}
                         ref={(el) => {
                             this.inputRefs.picker = el;
