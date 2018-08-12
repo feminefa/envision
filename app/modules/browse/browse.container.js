@@ -26,12 +26,12 @@ const mapStateToProps = (state, props) => {
     return {
         loading: state.patientReducer.loading,
         data: state.patientReducer.data,
-        patientCount: state.patientReducer.patientCount,
-        providerCount: state.patientReducer.providerCount,
-        adminCount: state.patientReducer.adminCount,
-        patients: state.patientReducer.patients,
-        providers: state.patientReducer.providers,
-        admins: state.patientReducer.admins,
+        patientCount: state.patientReducer.patientsSearch.patientCount,
+        providerCount: state.patientReducer.patientsSearch.providerCount,
+        adminCount: state.patientReducer.patientsSearch.adminCount,
+        patients: state.patientReducer.patientsSearch.patients,
+        providers: state.patientReducer.patientsSearch.providers,
+        admins: state.patientReducer.patientsSearch.admins,
         _user: state.patientReducer._user,
     }
 }

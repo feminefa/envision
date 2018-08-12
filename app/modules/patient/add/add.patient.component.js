@@ -37,6 +37,7 @@ export default class AddPatientComponent extends Component {
         this.required = {
             patient: {
                 provider: 'femi',
+                sex: 'M',
                 first_name: 'Mark',
                 last_name: 'Anthony',
                 address1: 'Tammy Road, Apt 2000',
@@ -54,6 +55,7 @@ export default class AddPatientComponent extends Component {
                 address1: 'Tammy Road, Apt 2000',
                 address2: 'Columbia MO 60523',
                 age: 32,
+                sex: 'F',
                 relationship: 'brother',
                 username: 'sammy',
                 password: 'asdfgh',
@@ -77,14 +79,16 @@ export default class AddPatientComponent extends Component {
         } else {
             this.state = {
                 patient: {
-                    provider: 'femi',
+
                     first_name: 'Mark',
                     last_name: 'Anthony',
+                    sex: 'M',
                     address1: 'Tammy Road, Apt 2000',
                     address2: 'Columbia MO 60523',
                     age: 88,
                     diagnosis: 'Hypertension',
-                    hospice: 'Unknow',
+                    provider: 'Dr Femi Nefa (MBBS)',
+                    hospice: 'Unknown',
                     username: 'mark',
                     password: 'asdfgh',
 
@@ -95,6 +99,7 @@ export default class AddPatientComponent extends Component {
                     address1: 'Tammy Road, Apt 2000',
                     address2: 'Columbia MO 60523',
                     age: 32,
+                    sex: 'F',
                     relationship: 'brother',
                     username: 'sammy',
                     password: 'asdfgh',
@@ -233,9 +238,7 @@ export default class AddPatientComponent extends Component {
     }
     render() {
         const { navigate } = this.props.navigation;
-        const providers = this.props.providers.map((item) => {
-            return { label: `${item.full_name}, ${item.title}`, value: item.username }
-        });
+
 
         return <View style={{...screenStyle.container, flex: 1, flexDirection: 'column'}}>
             <Text style={Object.assign({}, styles.error, {opacity: this.props.error?100:0 })} >
@@ -246,33 +249,8 @@ export default class AddPatientComponent extends Component {
             <View style={ { padding: 0 }} >
 
                 <View style={ { padding: 10 }} >
-                    <Text style={ screenStyle.label }>
-                        Provider:
-                    </Text>
 
-                    <RNPickerSelect
-                        placeholder={{
-                            label: 'Select a provider...',
-                            value: null,
-                        }}
-                        items={providers}
-                        onValueChange={(value) => {
-                            this.setState({ patient: Object.assign({}, this.state.patient, {
-                                provider: value,
-                            })});
-                        }}
-                        onUpArrow={() => {
-                            //this.inputRefs.picker.focus();
-                        }}
-                        onDownArrow={() => {
-                            //this.inputRefs.picker.togglePicker();
-                        }}
-                        style={{...pickerSelectStyles}}
-                        value={this.state.patient.provider}
-                        ref={(el) => {
-                            this.inputRefs.picker = el;
-                        }}
-                    />
+
 
 
                 <Text style={ screenStyle.label }>
@@ -321,7 +299,37 @@ export default class AddPatientComponent extends Component {
                     value = {''+this.state.patient.age}
                     onChangeText={(text) => this.onTextChange({patient: {age: text}})}
                 />
-                <View style={ styles.mediumHSeparator }/>
+                    <View style={ styles.mediumHSeparator }/>
+                    <Text style={ screenStyle.label }>
+                        Sex:
+                    </Text>
+
+                    <RNPickerSelect
+                        placeholder={{
+                            label: 'Select sex...',
+                            value: null,
+                        }}
+                        items={[{ label: 'Male', value: 'M' }, { label: 'Female', value: 'F' }]}
+                        onValueChange={(value) => {
+                            this.setState({ patient: Object.assign({}, this.state.patient, {
+                                    sex: value,
+                                })});
+                        }}
+                        onUpArrow={() => {
+                            //this.inputRefs.picker.focus();
+                        }}
+                        onDownArrow={() => {
+                            //this.inputRefs.picker.togglePicker();
+                        }}
+                        style={{...pickerSelectStyles, height:0}}
+                        value={this.state.patient.sex}
+                        ref={(el) => {
+                            this.inputRefs.picker = el;
+                        }}
+                    />
+
+
+                    <View style={ styles.mediumHSeparator }/>
                 <Text style={ screenStyle.label }>
                     Diagnosis:
                 </Text>
@@ -331,7 +339,17 @@ export default class AddPatientComponent extends Component {
                     value = {this.state.patient.diagnosis}
                     onChangeText={(text) => this.onTextChange({patient: {diagnosis: text}})}
                 />
-                <View style={ styles.mediumHSeparator }/>
+                    <View style={ styles.mediumHSeparator }/>
+                    <Text style={ screenStyle.label }>
+                        Provider:
+                    </Text>
+                    <TextInput
+                        style={screenStyle.input}
+                        placeholder="Name of Clinician"
+                        value = {this.state.patient.provider}
+                        onChangeText={(text) => this.onTextChange({patient: {provider: text}})}
+                    />
+                    <View style={ styles.mediumHSeparator }/>
                 <Text style={ screenStyle.label }>
                     Hospice Admission:
                 </Text>
@@ -411,8 +429,37 @@ export default class AddPatientComponent extends Component {
                     value = { ''+this.state.caregiver.age}
                     onChangeText={(text) => this.onTextChange({caregiver: { age: text}})}
                 />
+                    <View style={ styles.mediumHSeparator }/>
+                    <Text style={ screenStyle.label }>
+                        Caregiver's Sex:
+                    </Text>
 
-                <View style={ styles.mediumHSeparator }/>
+                    <RNPickerSelect
+                        placeholder={{
+                            label: 'Select sex...',
+                            value: null,
+                        }}
+                        items={[{ label: 'Male', value: 'M' }, { label: 'Female', value: 'F' }]}
+                        onValueChange={(value) => {
+                            this.setState({ patient: Object.assign({}, this.state.caregiver, {
+                                    sex: value,
+                                })});
+                        }}
+                        onUpArrow={() => {
+                            //this.inputRefs.picker.focus();
+                        }}
+                        onDownArrow={() => {
+                            //this.inputRefs.picker.togglePicker();
+                        }}
+                        style={{...pickerSelectStyles, height:0}}
+                        value={this.state.caregiver.sex}
+                        ref={(el) => {
+                            this.inputRefs.picker = el;
+                        }}
+                    />
+
+
+                    <View style={ styles.mediumHSeparator }/>
                 <Text style={ screenStyle.label }>
                     Caregiver's Relationship to Patient:
                 </Text>

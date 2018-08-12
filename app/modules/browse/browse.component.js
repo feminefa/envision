@@ -36,7 +36,7 @@ export default class BrowseComponent extends Component {
     }
 
     componentDidMount() {
-        // this.props.getCounts();
+         this.props.getCounts();
         //this.data =  this.props.data.patients;
         switch (this.props.navigation.state.params.type) {
             case ROLE.ADMIN:
@@ -89,23 +89,28 @@ export default class BrowseComponent extends Component {
             <View style={ browseStyles.searchSection}>
                 <TextInput
                     style={ browseStyles.input}
+                    value={this.state.key}
                     placeholder="Enter username, first name or last Name"
-                    onChangeText={(text) => this.setState({text})}
+                    onChangeText={(key) => this.setState({key})}
                 />
-                <TouchableHighlight onPress={ this.props.decrement } title={"Search"} style={browseStyles.searchButton}>
+                <TouchableHighlight onPress={ () => {  this.props.getCounts(this.state.key)} } title={"Search"} style={browseStyles.searchButton}>
                     <Text style={browseStyles.actionButtonText}>Search</Text>
+                </TouchableHighlight>
+                <TouchableHighlight onPress={ () => { this.setState({key: ''}); this.props.getCounts()} } title={"Reset"} style={browseStyles.searchButton}>
+                    <Text style={browseStyles.actionButtonText}>Reset</Text>
                 </TouchableHighlight>
             </View>
             <Text style={{height: this.props[this.type].length==0?150:0, padding:this.props[this.type].length==0?30:0, textAlignVertical:'center'}}>No Results Found</Text>
             <FlatList
                 style={browseStyles.list}
                 data={this.props[this.state.type]}
+                keyExtractor={(item, index) => item.username}
                 renderItem={({item}) => (
                     <View style={browseStyles.listItem}>
                         <View style={browseStyles.itemLeft }>
                             <TouchableOpacity
                                 onPress={() =>
-                                    navigate('Profile', { title: "Profile", username: item.username })
+                                    navigate('Profile', { title: "Profile", user: item })
                                 }
                                 style={{
                                     borderWidth:0,
@@ -123,7 +128,7 @@ export default class BrowseComponent extends Component {
                             </TouchableOpacity>
                             <TouchableOpacity
                                 onPress={() =>
-                                    navigate('Profile', { title: "Profile", username: item.username })
+                                    navigate('Profile', { title: "Profile", user: item })
                                 }
                                 style={{
                                     flex: 1,

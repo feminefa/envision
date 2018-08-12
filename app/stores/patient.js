@@ -4,20 +4,26 @@ import {
 } from 'react-navigation';
 export const PATIENT_STATES = {
     COUNT: 'patient.count',
+    SEARCH: 'users.search',
     RESET: 'dashboard.reset',
     ADDED: 'patient.add',
     DELETED: 'patient.deleted',
     ERROR: 'patient.error',
+    SCORES: 'patient.scores',
+    SCORE_UPDATED:  'patient.scores.updated',
     PROVIDERS_LOADED: 'providers.loaded',
 
 }
-export const patientReducer = (state = {providerCount: 0, adminCount: 0, patientCount: 0, providers: [], _user: null}, action) => {
+export const patientReducer = (state = {providerCount: 0, patientsSearch: {}, scores: {}, adminCount: 0, patientCount: 0, providers: [], _user: null}, action) => {
     let obj = {};
     switch (action.type) {
         case PATIENT_STATES.COUNT:
+        case PATIENT_STATES.SEARCH:
         case PATIENT_STATES.ADDED:
         case PATIENT_STATES.PROVIDERS_LOADED:
         case PATIENT_STATES.DELETED:
+        case PATIENT_STATES.SCORES:
+        case PATIENT_STATES.SCORE_UPDATED:
             obj =  Object.assign({success: true}, state, action);
             // console.log('feminefa', 'state state state', JSON.stringify(state))
             break;

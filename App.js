@@ -5,7 +5,7 @@ import  DashboardContainer  from './app/modules/dashboard/dashboard.container';
 import  BrowseContainer  from './app/modules/browse/browse.container';
 import  AddPatientContainer  from './app/modules/patient/add/add.patient.container';
 import  AddCaregiverContainer from './app/modules/AddCaregiverContainer';
-import  ProfileContainer from './app/modules/ProfileContainer';
+import  ProfileContainer from './app/modules/patient/profile/profile.patient.container';
 import { Provider } from 'react-redux';
 import { bindActionCreators } from 'redux';
 

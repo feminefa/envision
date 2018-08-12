@@ -143,7 +143,7 @@ module.exports= StyleSheet.create({
 
     },
     bottomCellLabel: {
-
+        marginBottom: 4
     },
 
     scoreText: {

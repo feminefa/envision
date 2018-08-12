@@ -13,6 +13,7 @@ import {realm} from '../../models/realm'
 import {NavigationActions} from "react-navigation";
 import NavigationService from "../../services/navigation";
 import {AlertIOS} from "react-native"
+import SCORE_TYPES from "../../models/ScoreTypes";
 
 export const patientActions = (dispatch) => ({
 
@@ -155,6 +156,22 @@ export const patientActions = (dispatch) => ({
        // console.log('feminefa', 'providers', JSON.stringify(providers.map(obj => {return obj})))
         dispatch({  type: PATIENT_STATES.PROVIDERS_LOADED,  providers: providers.map(obj => {return obj}),  providerCount: providers.length  });
     },
+
+    getScores: (user, start, end = null) => {
+        const scores = {...SCORE_TYPES.patient, fromDate: start, toDate: end}
+        if(end == null) end = start;
+        Object.keys(SCORE_TYPES.patient).forEach((key) => {
+            scores[key] = '?';
+            const avg = realm.objects('Score').filtered('user.username = "'+user.username+'" AND type = "'+key+'" AND date >= $0 AND date <= $1' ,
+                new Date(start), new Date(end)).avg('value');
+            if(avg) {
+                scores[key] = avg;
+            }
+        })
+        console.log('feminefa', 'scores', JSON.stringify(scores))
+        dispatch({  type: PATIENT_STATES.SCORES,  scores: scores  });
+        //const providers =
+    }
 
 
 

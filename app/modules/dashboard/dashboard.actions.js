@@ -17,12 +17,7 @@ export const dashboardActions = (dispatch) => ({
     hideError: (timeOut =  6000) => {
         setTimeout(()=> dispatch({  type: PATIENT_STATES.RESET,  error: null }), timeOut);
     },
-    getCounts: () => {
-        // dispatch({  type: DASHBOARD_STATES.COUNT,  data: {},  count: 232  });
-        // return;
-// console.log('feminefa', 'counting.............')
-
-
+    getCounts: (key = null) => {
                 if(seed) {
                     const users = [
                         {
@@ -91,20 +86,56 @@ export const dashboardActions = (dispatch) => ({
                         // console.log('feminefa', 'error', 'sddddds')
                     });
                 }
-        const patients = realm.objects('User').filtered('role = "'+ROLE.PATIENT+'"');
-        const providers = realm.objects('User').filtered('role = "'+ROLE.PROVIDER+'"');
-        const admins = realm.objects('User').filtered('role = "'+ROLE.ADMIN+'"');
-         // console.log('feminefa', 'providers.............',  providers.map((obj2)=>{return obj2}))
-        dispatch({  type: PATIENT_STATES.COUNT,  data: {
+                let query = '';
+                if (key) query += ' and (username CONTAINS[c] "'+key+'" OR first_name CONTAINS[c]  "'+key+'" OR last_name CONTAINS[c]  "'+key+'" ) ';
 
+        const patients = realm.objects('User').filtered('role = "'+ROLE.PATIENT+'"' + query);
+        const providers = realm.objects('User').filtered('role = "'+ROLE.PROVIDER+'"'  + query);
+        const admins = realm.objects('User').filtered('role = "'+ROLE.ADMIN+'"'  + query);
+         // console.log('feminefa', 'providers.............',  providers.map((obj2)=>{return obj2}))
+        if(key) {
+            dispatch({  type: PATIENT_STATES.SEARCH,  data: {
+
+                },
+                patientsSearch: {
+                    patients: patients.map((obj) => {
+                        return obj
+                    }),
+                    providers: providers.map((obj2) => {
+                        return obj2
+                    }),
+                    admins: admins.map((obj3) => {
+                        return obj3
+                    }),
+                    providerCount: providers.length,
+                    adminCount: admins.length,
+                    patientCount: patients.length
+                },
+
+            });
+        } else {
+            queryResult = {
+                patients: patients.map((obj) => {
+                    return obj
+                }),
+                    providers: providers.map((obj2) => {
+                    return obj2
+                }),
+                    admins: admins.map((obj3) => {
+                    return obj3
+                }),
+                    providerCount: providers.length,
+                    adminCount: admins.length,
+                    patientCount: patients.length
             },
-            patients: patients.map((obj)=>{return obj}),
-            providers: providers.map((obj2)=>{return obj2}),
-            admins: admins.map((obj3)=>{return obj3}),
-            providerCount: providers.length,
-            adminCount: admins.length,
-            patientCount: patients.length
-        });
+            dispatch({  type: PATIENT_STATES.COUNT,  data: {
+
+                },
+                ...queryResult,
+                patientsSearch: queryResult
+
+            });
+        }
       //  dispatch({  type: DASHBOARD_STATES.COUNT,  data: {},  count: patients.length  });
 
     },

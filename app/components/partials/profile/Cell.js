@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import {  View,  TouchableHighlight, Text, } from 'react-native';
 import { Icon } from 'react-native-elements'
+import SCORE_TYPES from "../../../models/ScoreTypes";
 const styles = require('./../../styles/common')
 const screenStyle= require('./../../styles/profile_style')
 
 export default class Cell extends Component {
+
     render() {
+        // console.log('feminefa', 'hahahahha', this.props.scoreType )
         const  scoreCell = function (score) {
             var color = "#daa520"
             switch (score) {
@@ -32,13 +35,13 @@ export default class Cell extends Component {
         };
         return (<View style={screenStyle.bottomCell}>
             <Text style={screenStyle.bottomCellLabel}>
-                {this.props.label}
+                {SCORE_TYPES.patient[this.props.scoreType]}
             </Text>
-            <View style={ scoreCell(this.props.score) }>
+            <TouchableHighlight onPress={ ()=>this.props.clicked(this.props.scoreType, this.props.scores[this.props.scoreType]) } style={ { ...scoreCell(this.props.score),  borderWidth:1, borderColor: '#fee9ad' } }>
                 <Text style={screenStyle.scoreText}>
-                    {this.props.score}
+                    {this.props.scores[this.props.scoreType]}
                 </Text>
-            </View>
+            </TouchableHighlight>
         </View>)
     }
 }
