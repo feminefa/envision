@@ -31,7 +31,8 @@ User.schema = {
         hospice: 'string?',
         provider: 'string?',
         title: 'string?',
-        relationship: 'string?'
+        relationship: 'string?',
+        sex: 'string?'
     }
 };
 module.exports = User;

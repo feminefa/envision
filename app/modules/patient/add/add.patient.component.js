@@ -146,14 +146,15 @@ export default class AddPatientComponent extends Component {
     }
 
     componentDidMount(){
+        this.props.hideError();
         // console.debug('feminefa', JSON.stringify(this.props))
        // this.count();
-        this.props.getProviders();
-        this.setState({
+        //this.props.getProviders();
+        /*this.setState({
             providers: this.props.providers.map((item) => {
                 return { label: `${item.full_name}, ${item.title}`, value: item.username }
             }
-        )})
+        )})*/
     }
     componentDidUpdate(){
         // console.debug('feminefa', JSON.stringify(this.props))
@@ -190,7 +191,7 @@ export default class AddPatientComponent extends Component {
         // this.refs._scrollView.scrollTo(0, 0, true);
     }
     submitForm() {
-        //this.props.add(this.state.patient, this.state.caregiver); return;
+        //this.props.save(this.state.patient, this.state.caregiver); return;
         this.validator.error = '';
         Object.keys(this.required.patient).forEach((key) => {
             if ( (!this.state.patient[key] || this.state.patient[key] == '')) {
@@ -233,7 +234,7 @@ export default class AddPatientComponent extends Component {
             }
         }
         if(!this.validator.error || this.validator.error == '') {
-                this.props.add(this.state.patient, this.state.caregiver, this.user);
+                this.props.save(this.state.patient, this.state.caregiver, this.user);
         }
     }
     render() {
@@ -341,7 +342,7 @@ export default class AddPatientComponent extends Component {
                 />
                     <View style={ styles.mediumHSeparator }/>
                     <Text style={ screenStyle.label }>
-                        Provider:
+                        dde  nnvnvvbvcnvvbnnll8r:
                     </Text>
                     <TextInput
                         style={screenStyle.input}

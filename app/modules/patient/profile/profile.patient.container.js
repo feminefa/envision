@@ -24,6 +24,8 @@ const mapStateToProps = (state, props) => {
     return {
         loading: state.patientReducer.loading,
         scores: state.patientReducer.scores,
+        chartScores: state.patientReducer.chartScores,
+        _user: state.authReducer.user,
        // navigation: state.patientReducer.navigation,
     }
 }
@@ -34,7 +36,7 @@ const Content= connect(mapStateToProps, patientActions)(Layout)
 export default  class Container extends Component {
     static navigationOptions = ({navigation}) => {
         return {
-            title: (navigation.state.params.title?navigation.state.params.title:"Profile")
+            title: 'Profile'
         }
     }
 

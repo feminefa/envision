@@ -14,18 +14,19 @@ module.exports= StyleSheet.create({
 
     },
     formSection: {
-        flex: 1,
+
         justifyContent: 'center',
         alignItems: 'center',
         padding: 0,
-        marginTop: 30,
-        height: 400
+
+        height: height
     },
     welcome: {
         color: "#000000",
         fontSize: 30,
         fontWeight: 'bold',
-        margin: 10
+        margin: 10,
+        marginBottom:30
     },
     appName: {
         color: "#daa520",
@@ -56,7 +57,7 @@ module.exports= StyleSheet.create({
         backgroundColor: "#f9f9f9"
     },
     buttonSection: {
-        flex: 1,
+
         flexDirection: "column",
         alignItems: 'center',
         height: 100,

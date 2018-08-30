@@ -23,6 +23,12 @@ import {authReducer} from "./app/stores/auth";
 // import Tabs from './auth/Tabs'
 // import Nav from './nav/Nav'
 import NavigationService from './app/services/navigation'
+import {ROLE} from "./app/models/Role";
+import { Client } from 'rollbar-react-native'
+const rollbar = new Client('2ed4bba32cc34b15944f66ddd928556d');
+const error='feminefa', message=null, extra='error'
+//rollbar.error('feminefa', 'error')
+// console.log(femi)
 class App extends React.Component {
     state = {
         user: {},
@@ -33,7 +39,8 @@ class App extends React.Component {
         this.state = {
             isLoading: true,
             username: '',
-            password: ''
+            password: '',
+            user: {}
         }
         this.logout = this.logout.bind(this)
         // this.hideError = this.hideError.bind(this);
@@ -48,7 +55,7 @@ class App extends React.Component {
                 //dispatch(actions.nodeClicked(data))
                 this.user= userObj;
                 // this.props.user = user;
-                console.log('feminefa', 'user', userObj)
+                //console.log('feminefa', 'user', userObj)
                 this.setState({ user: userObj })
             });
             this.setState({ user, isLoading: false })
@@ -64,7 +71,7 @@ class App extends React.Component {
                 //dispatch(actions.nodeClicked(data))
                 this.user= userObj;
                 // this.props.user = user;
-                console.log('feminefa', 'user', userObj)
+                //console.log('feminefa', 'user', userObj)
                 this.setState({ user: userObj })
             });
            // const user = await Auth.currentAuthenticatedUser()
@@ -99,7 +106,7 @@ class App extends React.Component {
         if (this.state.user && this.state.user.username) {
             loggedIn = true
         }
-        const NotLoggedIn = ( StackNavigator({
+        let navs = {
             Login: {screen: LoginContainer},
             Dashboard: {screen: DashboardContainer},
             Browse: {screen: BrowseContainer},
@@ -107,8 +114,20 @@ class App extends React.Component {
             AddCaregiver: {screen: AddCaregiverContainer},
             Profile: {screen: ProfileContainer},
 
-        }, {
-            initialRouteName: loggedIn?'Dashboard':'Login',
+        }
+        let initialLoggedInRoute = 'Dashboard';
+        if(loggedIn) {
+            if (this.state.user.role !== ROLE.ADMIN) {
+                navs = {
+                    Login: {screen: LoginContainer},
+                    Profile: {screen: ProfileContainer},
+
+                }
+                initialLoggedInRoute = 'Profile';
+            }
+        }
+        const NotLoggedIn = ( StackNavigator(navs, {
+            initialRouteName: loggedIn?initialLoggedInRoute:'Login',
 
             /* The header config from HomeScreen is now here */
             navigationOptions: {
@@ -146,7 +165,7 @@ class App extends React.Component {
                 }}  />
             )
         } else {
-            console.log('feminefa', 'logged in', 'FALSE')
+            // console.log('feminefa', 'logged in', 'FALSE')
             return (
                <NotLoggedIn  ref={navigatorRef => {
                    NavigationService.setTopLevelNavigator(navigatorRef);
@@ -161,6 +180,7 @@ const mapStateToProps = state => (
         auth: state.auth,
         //store: store,
         navigation: state.navigation,
+        user: state.authReducer.user,
     }
 )
 const bindAction = dispatch => {

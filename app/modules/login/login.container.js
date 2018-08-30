@@ -20,8 +20,9 @@ import {
 import {authReducer} from "../../stores/auth";
 
 const mapStateToProps = (state, props) => ({
+
     data: state.authReducer.data,
-    _user: state.authReducer._user,
+    _user: state.authReducer.user,
     error: state.authReducer.error
 })
 const Content= connect(mapStateToProps, mapDispatchToProps)(LoginComponent)

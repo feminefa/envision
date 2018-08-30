@@ -1,5 +1,5 @@
 export default SCORE_TYPES = {
-    patient: {
+
         pain: 'Pain',
         depression: 'Depression',
         wellbeing: 'Wellbeing',
@@ -10,8 +10,5 @@ export default SCORE_TYPES = {
         tiredness: 'Tiredness',
         poor_appetite: 'Lack of appetite',
         other: 'Other e.g. Constipation'
-    },
-    caregiver: {
 
-    }
 }

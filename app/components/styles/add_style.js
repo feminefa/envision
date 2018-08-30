@@ -49,11 +49,12 @@ module.exports= StyleSheet.create({
     },
     input: {
         borderWidth: 1,
-        minWidth:300,
+        minWidth:100,
         margin:3,
         height: 35,
         padding: 2,
         borderColor: "#757575",
+        flex:1
        /* placeholderTextColor: "#757575" */
     },
     select: {

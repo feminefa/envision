@@ -21,14 +21,14 @@ module.exports= StyleSheet.create({
     content: {
         flex: 1,
         flexDirection: "column",
-        height: 40
+        height: 40,
     },
     welcome: {
         color: "#000000",
         fontSize: 30,
         fontWeight: 'bold',
         margin: 10,
-
+        textAlign: 'center'
     },
     section: {
 
@@ -63,7 +63,7 @@ module.exports= StyleSheet.create({
     },
 
     sectionContent: {
-
+        paddingTop: 4,
         flexDirection: "row",
         flex: 1,
         height: 40
@@ -79,16 +79,17 @@ module.exports= StyleSheet.create({
 
     actionButton: {
         flex: 1,
-        backgroundColor: "#f4f4f4",
-        height: 40,
-        padding:10,
-        margin: 3,
+        backgroundColor: "#1a659a",
+        height: 30,
+        padding:5,
+        margin: 5,
+        minWidth: 40,
         justifyContent: 'center',
         alignItems: 'center',
     },
     actionButtonText: {
 
-        color: 'blue',
+        color: 'white',
     },
 
     addButtonText: {
@@ -96,7 +97,7 @@ module.exports= StyleSheet.create({
     },
     addButton: {
         flex: 1,
-        backgroundColor: "#289ef4",
+        backgroundColor: "#1a659a",
         height: 30,
         width: 60,
         padding:3,

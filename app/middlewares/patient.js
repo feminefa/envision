@@ -16,7 +16,7 @@ const navigateAfterFinish= (screen) => {
 export const patientMiddleware = store => next => action => {
     switch (action.type) {
         case PATIENT_STATES.ADDED:
-            console.log('feminefa', "Middleware triggered:", action);
+            // console.log('feminefa', "Middleware triggered:", action);
             //navigateAfterFinish('Dashboard');
             break;
     }

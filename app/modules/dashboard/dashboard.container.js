@@ -31,8 +31,10 @@ const mapStateToProps = (state, props) => {
         admins: state.patientReducer.admins,
         patientCount: state.patientReducer.patientCount,
         providerCount: state.patientReducer.providerCount,
+        scoreCount:  state.patientReducer.scoreCount,
         adminCount: state.patientReducer.adminCount,
-        _user: state.patientReducer._user,
+        _user: state.authReducer.user,
+        showModal: state.patientReducer.showPasswordModal,
     }
 }
 

@@ -6,7 +6,7 @@
  */
 
 #import "AppDelegate.h"
-
+#import <RollbarReactNative/RollbarReactNative.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
@@ -14,6 +14,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [RollbarReactNative initWithAccessToken:@"2ed4bba32cc34b15944f66ddd928556d"];
   NSURL *jsCodeLocation;
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];

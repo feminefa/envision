@@ -29,9 +29,8 @@ module.exports= StyleSheet.create({
         width: width
     },
     input: {
-        flex: 8,
+        flex: 5,
         borderWidth: 1,
-        minWidth:150,
         margin:3,
         height: 35,
         padding: 2,
@@ -97,16 +96,17 @@ module.exports= StyleSheet.create({
 
     searchButton: {
         flex: 1,
-        backgroundColor: "#f4f4f4",
+        backgroundColor: "#909090",
         height: 35,
         padding:10,
         margin: 3,
+        minWidth: 60,
         justifyContent: 'center',
         alignItems: 'center',
     },
     actionButtonText: {
-
-        color: 'blue',
+        fontWeight: 'bold',
+        color: '#ffffff',
     },
     listItem: {
         flexDirection: "row",
@@ -136,7 +136,7 @@ module.exports= StyleSheet.create({
     },
     itemButton: {
         flex: 1,
-        backgroundColor: "#f4f4f4",
+        backgroundColor: '#1a659a',
         height: 35,
         padding:10,
         margin: 3,

@@ -10,7 +10,7 @@ const sha256= require('sha256');
 import { AsyncStorage } from 'react-native';
 import {NavigationActions} from "react-navigation";
 import NavigationService from "../../services/navigation";
-const seed = false;
+const seed = true;
 const _  =  require('underscore');
 
 
@@ -22,35 +22,43 @@ export const mapDispatchToProps = (dispatch) => ({
 
 
                 if(seed) {
-                    realm.write(() => {
-                        realm.create('User', {
-                            username: 'admin',
-                            first_name: 'Super',
-                            last_name: 'Admin', // could also be omitted entirely
-                            verified: false,
-                            role: ROLE.ADMIN,
-                            password: sha256('password')
+                    try {
+                        realm.write(() => {
+                            realm.create('User', {
+                                username: 'admin',
+                                first_name: 'Super Admin',
+                                last_name: 'Admin', // could also be omitted entirely
+                                verified: true,
+                                role: ROLE.ADMIN,
+                                password: sha256('password')
+                            });
+                            realm.create('User', {
+                                username: 'admin2',
+                                first_name: 'Admin',
+                                last_name: 'Admin', // could also be omitted entirely
+                                verified: true,
+                                role: ROLE.ADMIN,
+                                title: 'Dr (MD)',
+                                password: sha256('password')
+                            });
+                            // console.log('feminefa', 'error', 'sddddds')
                         });
-                        realm.create('User', {
-                            username: 'femi',
-                            first_name: 'Femi',
-                            last_name: 'Nefa', // could also be omitted entirely
-                            verified: false,
-                            role: ROLE.PROVIDER,
-                            title: 'Dr (MD)',
-                            password: sha256('asdfgh')
-                        });
-                        // console.log('feminefa', 'error', 'sddddds')
-                    });
+                    }catch (error) {
+
+                    }
                 }
                 const user = realm.objectForPrimaryKey('User', username);
                 if (user && user.password == sha256(password)) {
                     const userObj = _.extend({}, user);
                     AsyncStorage.setItem('token', JSON.stringify(userObj) ).then((err, t) => {
                         // console.debug('feminefa', 'user logged in', JSON.stringify(userObj) );
-                        dispatch({ type: AUTH_STATES.LOGIN_SUCCESS, data: userObj, _user: userObj  });
+                        dispatch({ type: AUTH_STATES.LOGIN_SUCCESS, data: userObj, user: userObj  });
                         //navigation('Dashboard', {title: 'Welcome ' + userObj.username});
-                        NavigationService.navigate('Dashboard', {}, true)
+                        //reload the login page
+                        NavigationService.navigate('Login', {title: 'Profile', user: userObj}, true);
+                        return;
+
+
                     })
                 } else{
                    // console.debug('feminefa', 'user', 'Auth failed' );
@@ -58,27 +66,6 @@ export const mapDispatchToProps = (dispatch) => ({
 
                 }
                  // realm.close()
-
-       /* return fetch('https://facebook.github.io/react-native/movies.json')
-            .then((response) => response.json())
-            .then((responseJson) => {
-
-                /* this.setState({
-                     isLoading: false,
-                     dataSource: responseJson.movies,
-                 }, function(){
-
-                 }); */
-         //AsyncStorage.getItem('name', (err, t) => {
-            // dispatch({ type: AUTH_STATES.LOGIN_SUCCESS, data: responseJson })
-         //})
-
-    // })
-    // .catch((error) =>{
-    //     console.error(error);
-    // });
-
-
 
     },
     logout: () => {

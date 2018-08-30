@@ -37,10 +37,15 @@ function closeScreen(screen, params, index = 0) {
     return this.dispatch(resetAction);
 }
 
+function goBack(screen) {
+    _navigator.dispatch(NavigationActions.back(screen));
+}
+
 
 export default {
     navigate,
     setTopLevelNavigator,
     dispatch,
-    closeScreen
+    closeScreen,
+    goBack,
 };

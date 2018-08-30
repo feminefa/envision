@@ -83,7 +83,7 @@ export default class BrowseComponent extends Component {
                 <Text style={browseStyles.actionButtonText}>Loading...</Text>
             </View>
         }
-        console.log('feminefa', 'data', this.state.type)
+        // console.log('feminefa', 'data', this.state.type)
 
         return <View style={ browseStyles.container}>
             <View style={ browseStyles.searchSection}>

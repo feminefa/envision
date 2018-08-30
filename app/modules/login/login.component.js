@@ -31,7 +31,8 @@ export default class LoginComponent extends Component {
     }
 
     componentDidMount(){
-        console.debug('feminefa', JSON.stringify(this.props))
+        this.props.hideError();
+        // console.debug('feminefa', JSON.stringify(this.props))
             // this.props.login('feminefa', 'password');
     }
 
@@ -56,8 +57,10 @@ export default class LoginComponent extends Component {
                 <Text style={loginStyles.appName}>
                   { config.app_name }
                 </Text>
+            <View style={ styles.largeHSeparator }/>
+            <View style={ styles.largeHSeparator }/>
 
-            <Text style={Object.assign({}, styles.error, {opacity: this.props.error?100:0 })} >
+            <Text style={Object.assign({}, styles.error, {opacity: this.props.error?100:0 , width:500, textAlign:'center'})} >
                 {this.props.error}
             </Text>
                 <TextInput
@@ -87,15 +90,16 @@ export default class LoginComponent extends Component {
                     </TouchableHighlight>
                     <View style={ styles.largeHSeparator }/>
                     <TouchableHighlight onPress={ this.props.register } title={"Forgot Password"} >
-                        <Text style={loginStyles.forgotText}>Forgot Password? Click here</Text>
+                        <Text style={loginStyles.forgotText}></Text>
                     </TouchableHighlight>
                     <View style={ styles.largeHSeparator }/>
                   <TouchableHighlight onPress={ this.props.register } title={"Register"} style={{display:"none"}} >
-                        <Text style={loginStyles.forgotText}>New User? Register</Text>
+                        <Text style={loginStyles.forgotText}></Text>
                     </TouchableHighlight>
                 </View>
-
-
+            <View style={ styles.largeHSeparator }/>
+            <View style={ styles.largeHSeparator }/>
+            <Text>Copyright 2018. All rights reserved.</Text>
 
              </View>
 

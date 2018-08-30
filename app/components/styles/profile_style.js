@@ -45,7 +45,7 @@ module.exports= StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 5,
-        backgroundColor: '#289ef4',
+        backgroundColor: '#1a659a',
         height: 50,
         minWidth: 100,
         margin: 0
@@ -96,14 +96,13 @@ module.exports= StyleSheet.create({
         padding: 0,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 20,
+        marginTop: 10,
         backgroundColor: "#eeeeee",
         borderWidth: 1,
         borderColor: "#e2e2e2"
 
     },
     middleTitle: {
-        flex: 1,
         flexDirection: "column",
         backgroundColor: "#eeeeee",
         justifyContent: 'flex-start',
@@ -164,8 +163,99 @@ module.exports= StyleSheet.create({
     footerText: {
         justifyContent: 'center',
         alignItems: 'center',
-        fontSize: 10,
+        fontSize: 11,
         fontWeight: "bold"
+    },
+
+    bottomModal: {
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        margin: 20,
+    },
+    dateModal: {
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        margin: 20,
+    },
+    scoreDialog: {
+        backgroundColor: '#ffffff',
+        paddingTop: 0,
+        alignItems: 'stretch',
+        flex: 1,
+        flexDirection: 'column',
+        borderRadius: 4,
+        borderColor: 'rgba(0, 0, 0, 0.3)',
+        borderWidth: 1,
+        marginTop: height-350,
+
+    },
+    dialogButton: {borderTopWidth:1,
+        backgroundColor:'#f4f4f4',
+        padding: 15,
+        borderColor: '#cccccc',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    todayButton: {
+        borderTopWidth:1,
+
+        padding: 15,
+        borderColor: '#f4f4f4',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    dialogBackground: {
+        height: height,
+        width: width,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)'
+    },
+    datePickerContainer: {
+        position: 'absolute',
+        bottom: 0,
+        width: width,
+        height: 340,
+        backgroundColor: '#ffffff',
+
+    },
+    chartContainer: {
+            position: 'absolute',
+            bottom: 0,
+            width: width,
+            height: 550,
+            backgroundColor: '#ffffff',
+        justifyContent: 'flex-start'
+
+        },
+
+    datePickerControls: {
+        width: width,
+        flex: 1,
+        height: 20,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        borderTopWidth:1,
+        borderColor: '#f4f4f4',
+    },
+    chartControls: {
+        width: width,
+        flex: 1,
+        height: 20,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        borderTopWidth:1,
+        borderColor: '#f4f4f4',
+    },
+    scoreCellsLegend: {
+        width: 60,
+        height: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: 10,
+        padding: 3
+    },
+    scoreCellsLegendText: {
+        fontSize: 11,
+        textAlign:'center'
     }
 
 
